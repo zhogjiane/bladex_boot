@@ -99,6 +99,12 @@ public class User extends TenantEntity {
 	 * 部门id
 	 */
 	private String postId;
-
-
+	/**
+	 * 实习公司
+	 */
+	private String companyName;
+	/**
+	 * 实习地址
+	 */
+	private String companyAddress;
 }

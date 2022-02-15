@@ -112,10 +112,10 @@ oss:
   enabled: true
   name: qiniu
   tenant-mode: true
-  endpoint: http://prt1thnw3.bkt.clouddn.com
-  access-key: N_Loh1ngBqcJovwiAJqR91Ifj2vgOWHOf8AwBA_h
-  secret-key: AuzuA1KHAbkIndCU0dB3Zfii2O3crHNODDmpxHRS
-  bucket-name: blade
+  endpoint: http://r75gp562u.hd-bkt.clouddn.com
+  access-key: 0hJ5yGWLjIdF3bQPCCL4HhVVJyA_bIysVaAA2vcb
+  secret-key: 5KPgi3C_y3N5coPTOPr_bKUoxC-GZLvvnGiY_wfQ
+  bucket-name: blade2022
 
 #第三方登陆配置
 social:

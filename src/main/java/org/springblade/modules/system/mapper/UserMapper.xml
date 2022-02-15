@@ -24,6 +24,8 @@
         <result column="role_id" property="roleId"/>
         <result column="dept_id" property="deptId"/>
         <result column="post_id" property="postId"/>
+        <result column="company_name" property="companyName"/>
+        <result column="company_address" property="companyAddress"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

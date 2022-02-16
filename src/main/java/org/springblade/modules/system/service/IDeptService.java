@@ -71,4 +71,9 @@ public interface IDeptService extends IService<Dept> {
 	 */
 	boolean submit(Dept dept);
 
+	/**
+	 * 查询所有教师
+	 * @return
+	 */
+    List<Dept> getAllTeacher();
 }

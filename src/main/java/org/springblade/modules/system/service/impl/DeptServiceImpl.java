@@ -87,4 +87,9 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements ID
 		return saveOrUpdate(dept);
 	}
 
+	@Override
+	public List<Dept> getAllTeacher() {
+		return baseMapper.getAllTeacher();
+	}
+
 }

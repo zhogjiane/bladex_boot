@@ -13,50 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springblade.modules.system.mapper;
+package org.springblade.modules.system.internshipFileSubmit.service;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springblade.modules.system.internshipFileSubmit.entity.InternshipFileSubmit;
+import org.springblade.modules.system.internshipFileSubmit.vo.InternshipFileSubmitVO;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import org.springblade.modules.system.entity.Dept;
-import org.springblade.modules.system.vo.DeptVO;
-
-import java.util.List;
 
 /**
- * Mapper 接口
+ * 实习材料提交表 服务类
  *
- * @author Chill
+ * @author Blade
+ * @since 2022-02-15
  */
-public interface DeptMapper extends BaseMapper<Dept> {
+public interface IInternshipFileSubmitService extends IService<InternshipFileSubmit> {
 
 	/**
 	 * 自定义分页
 	 *
 	 * @param page
-	 * @param dept
+	 * @param internshipFileSubmit
 	 * @return
 	 */
-	List<DeptVO> selectDeptPage(IPage page, DeptVO dept);
+	IPage<InternshipFileSubmitVO> selectInternshipFileSubmitPage(IPage<InternshipFileSubmitVO> page, InternshipFileSubmitVO internshipFileSubmit);
 
-	/**
-	 * 获取树形节点
-	 *
-	 * @param tenantId
-	 * @return
-	 */
-	List<DeptVO> tree(String tenantId);
-
-	/**
-	 * 获取部门名
-	 *
-	 * @param ids
-	 * @return
-	 */
-	List<String> getDeptNames(Long[] ids);
-
-	/**
-	 * 查询所有教师
-	 * @return
-	 */
-    List<Dept> getAllTeacher();
 }

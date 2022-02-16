@@ -111,5 +111,15 @@ public class DeptController extends BladeController {
 		return R.status(deptService.removeByIds(Func.toLongList(ids)));
 	}
 
+	/**
+	 * 查询所有教师
+	 */
+	@GetMapping("/getAllTeacher")
+	@ApiOperationSupport(order = 5)
+	@ApiOperation(value = "查询所有教师", notes = "传入ids")
+	public R<List<Dept>> getAllTeacher() {
+		return R.data(deptService.getAllTeacher());
+	}
+
 
 }

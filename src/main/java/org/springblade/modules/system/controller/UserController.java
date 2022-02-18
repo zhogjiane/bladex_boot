@@ -268,4 +268,14 @@ public class UserController {
 		return R.status(userService.registerGuest(user, oauthId));
 	}
 
+	/**
+	 * 查询所有用户
+	 */
+	@ApiOperationSupport(order = 16)
+	@ApiOperation(value = "查询所有用户")
+	@GetMapping("/getAllUser")
+	public R<List<UserVO>> getAllUser() {
+		List<UserVO> list = userService.getAllUser();
+		return R.data(list);
+	}
 }

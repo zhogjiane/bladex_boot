@@ -96,4 +96,8 @@
         SELECT id, tenant_id, account, name, real_name, email, phone, birthday, role_id, dept_id, post_id FROM blade_user ${ew.customSqlSegment}
     </select>
 
+    <select id="getAllUser" resultType="org.springblade.modules.system.vo.UserVO">
+        SELECT id,name FROM blade_user where is_deleted = 0
+    </select>
+
 </mapper>

@@ -31,6 +31,7 @@ import org.springblade.modules.system.entity.UserOauth;
 import org.springblade.modules.system.excel.UserExcel;
 import org.springblade.modules.system.mapper.UserMapper;
 import org.springblade.modules.system.service.*;
+import org.springblade.modules.system.vo.UserVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -205,6 +206,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 		userOauth.setTenantId(user.getTenantId());
 		boolean oauthTemp = userOauthService.updateById(userOauth);
 		return (userTemp && oauthTemp);
+	}
+
+	@Override
+	public List<UserVO> getAllUser() {
+		return baseMapper.getAllUser();
 	}
 
 

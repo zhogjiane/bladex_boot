@@ -21,6 +21,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Param;
 import org.springblade.modules.system.entity.User;
 import org.springblade.modules.system.excel.UserExcel;
+import org.springblade.modules.system.vo.UserVO;
 
 import java.util.List;
 
@@ -82,4 +83,9 @@ public interface UserMapper extends BaseMapper<User> {
 	 */
 	List<UserExcel> exportUser(@Param("ew") Wrapper<User> queryWrapper);
 
+	/**
+	 * 查询所有用户
+	 * @return
+	 */
+    List<UserVO> getAllUser();
 }

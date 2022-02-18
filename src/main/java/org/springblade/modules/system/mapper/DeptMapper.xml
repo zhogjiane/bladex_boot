@@ -52,7 +52,7 @@
         and is_deleted = 0
     </select>
 
-    <select id="getAllTeacher" resultMap="deptResultMap">
-        select * from blade_dept where is_deleted = 0 and parent_id = 1123598813738675202
+    <select id="getAllTeacher" resultType="org.springblade.modules.system.entity.Dept">
+        select id,dept_name from blade_dept where is_deleted = 0 and parent_id = 1123598813738675202
     </select>
 </mapper>

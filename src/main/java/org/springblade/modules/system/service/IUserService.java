@@ -23,6 +23,7 @@ import org.springblade.modules.system.entity.User;
 import org.springblade.modules.system.entity.UserInfo;
 import org.springblade.modules.system.entity.UserOauth;
 import org.springblade.modules.system.excel.UserExcel;
+import org.springblade.modules.system.vo.UserVO;
 
 import java.util.List;
 
@@ -143,4 +144,10 @@ public interface IUserService extends BaseService<User> {
 	 * @return
 	 */
 	boolean registerGuest(User user, Long oauthId);
+
+	/**
+	 * 查询所有用户
+	 * @return
+	 */
+    List<UserVO> getAllUser();
 }

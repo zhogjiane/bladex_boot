@@ -20,6 +20,7 @@ import org.springblade.modules.system.internshipFileSubmit.vo.InternshipFileSubm
 import org.springblade.modules.system.internshipFileSubmit.mapper.InternshipFileSubmitMapper;
 import org.springblade.modules.system.internshipFileSubmit.service.IInternshipFileSubmitService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springblade.modules.system.vo.UserVO;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
@@ -35,6 +36,11 @@ public class InternshipFileSubmitServiceImpl extends ServiceImpl<InternshipFileS
 	@Override
 	public IPage<InternshipFileSubmitVO> selectInternshipFileSubmitPage(IPage<InternshipFileSubmitVO> page, InternshipFileSubmitVO internshipFileSubmit) {
 		return page.setRecords(baseMapper.selectInternshipFileSubmitPage(page, internshipFileSubmit));
+	}
+
+	@Override
+	public IPage<UserVO> selectUserPage(IPage<UserVO> page, UserVO userVO, Long userId) {
+		return page.setRecords(baseMapper.selectUserPage(page, userVO, userId));
 	}
 
 }

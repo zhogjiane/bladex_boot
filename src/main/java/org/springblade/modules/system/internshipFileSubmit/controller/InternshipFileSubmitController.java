@@ -29,6 +29,7 @@ import org.springblade.core.tool.utils.Func;
 import org.springblade.modules.system.internshipFileSubmit.entity.InternshipFileSubmit;
 import org.springblade.modules.system.internshipFileSubmit.service.IInternshipFileSubmitService;
 import org.springblade.modules.system.internshipFileSubmit.vo.InternshipFileSubmitVO;
+import org.springblade.modules.system.vo.UserVO;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -119,6 +120,17 @@ public class InternshipFileSubmitController extends BladeController {
 	@ApiOperation(value = "删除", notes = "传入ids")
 	public R remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
 		return R.status(internshipFileSubmitService.removeByIds(Func.toLongList(ids)));
+	}
+
+	/**
+	 * 自定义分页 查询当前登录教师的
+	 */
+	@GetMapping("/userPage")
+	@ApiOperationSupport(order = 9)
+	@ApiOperation(value = "分页", notes = "传入userVO")
+	public R<IPage<UserVO>> userPage(UserVO userVO, Query query, Long userId) {
+		IPage<UserVO> pages = internshipFileSubmitService.selectUserPage(Condition.getPage(query), userVO, userId);
+		return R.data(pages);
 	}
 
 

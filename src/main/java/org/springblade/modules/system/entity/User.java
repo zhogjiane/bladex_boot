@@ -107,4 +107,12 @@ public class User extends TenantEntity {
 	 * 实习地址
 	 */
 	private String companyAddress;
+	/**
+	 * 实习信息提交状态
+	 */
+	private int submitStatus;
+	/**
+	 * 实习成绩
+	 */
+	private int grades;
 }

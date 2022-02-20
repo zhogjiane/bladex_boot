@@ -26,6 +26,8 @@
         <result column="post_id" property="postId"/>
         <result column="company_name" property="companyName"/>
         <result column="company_address" property="companyAddress"/>
+        <result column="submit_status" property="submitStatus"/>
+        <result column="grades" property="grades"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

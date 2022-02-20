@@ -19,6 +19,7 @@ import org.springblade.modules.system.internshipFileSubmit.entity.InternshipFile
 import org.springblade.modules.system.internshipFileSubmit.vo.InternshipFileSubmitVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.springblade.modules.system.vo.UserVO;
 
 /**
  * 实习材料提交表 服务类
@@ -37,4 +38,13 @@ public interface IInternshipFileSubmitService extends IService<InternshipFileSub
 	 */
 	IPage<InternshipFileSubmitVO> selectInternshipFileSubmitPage(IPage<InternshipFileSubmitVO> page, InternshipFileSubmitVO internshipFileSubmit);
 
+	/**
+	 * 自定义分页
+	 *
+	 * @param page
+	 * @param userVO
+	 * @param userId
+	 * @return
+	 */
+	IPage<UserVO> selectUserPage(IPage<UserVO> page, UserVO userVO, Long userId);
 }

@@ -17,8 +17,10 @@ package org.springblade.modules.system.internshipFileSubmit.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.apache.ibatis.annotations.Param;
 import org.springblade.modules.system.internshipFileSubmit.entity.InternshipFileSubmit;
 import org.springblade.modules.system.internshipFileSubmit.vo.InternshipFileSubmitVO;
+import org.springblade.modules.system.vo.UserVO;
 
 import java.util.List;
 
@@ -39,4 +41,13 @@ public interface InternshipFileSubmitMapper extends BaseMapper<InternshipFileSub
 	 */
 	List<InternshipFileSubmitVO> selectInternshipFileSubmitPage(IPage page, InternshipFileSubmitVO internshipFileSubmit);
 
+	/**
+	 * 自定义分页
+	 *
+	 * @param page
+	 * @param userVO
+	 * @param userId
+	 * @return
+	 */
+    List<UserVO> selectUserPage(IPage<UserVO> page, UserVO userVO,@Param("userId") Long userId);
 }

@@ -25,4 +25,16 @@
         select * from internship_file_submit where is_deleted = 0
     </select>
 
+    <select id="selectUserPage" resultType="org.springblade.modules.system.entity.User">
+        SELECT
+        *
+        FROM
+        blade_user
+        WHERE
+        is_deleted = 0
+        AND dept_id = ( SELECT dept_id FROM blade_user WHERE is_deleted = 0 AND id = #{userId} )
+        AND id &lt;&gt; #{userId}
+        AND submit_status = 2
+    </select>
+
 </mapper>

@@ -21,6 +21,7 @@ public interface IMonitorItemsService extends IService<MonitorItems> {
 	 * @param monitorItems
 	 * @return
 	 */
-	IPage<MonitorItemsVO> selectMonitorItemsPage(IPage<MonitorItemsVO> page, MonitorItemsVO monitorItems);
+	IPage<MonitorItemsVO> selectMonitorItemsPage(IPage<MonitorItemsVO> page,
+		MonitorItemsVO monitorItems);
 
 }

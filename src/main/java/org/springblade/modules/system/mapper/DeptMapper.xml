@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.springblade.modules.system.mapper.DeptMapper">
 
     <!-- 通用查询映射结果 -->
@@ -24,16 +25,25 @@
 
     <!-- 通用查询结果列 -->
     <sql id="baseColumnList">
-        select
-        id, parent_id, ancestors, dept_name, full_name, sort, remark, is_deleted
+        select id,
+               parent_id,
+               ancestors,
+               dept_name,
+               full_name,
+               sort,
+               remark,
+               is_deleted
     </sql>
 
     <select id="selectDeptPage" resultMap="deptResultMap">
-        select * from blade_dept where is_deleted = 0
+        select *
+        from blade_dept
+        where is_deleted = 0
     </select>
 
     <select id="tree" resultMap="treeNodeResultMap">
-        select id, parent_id, dept_name as title, id as 'value', id as 'key' from blade_dept where is_deleted = 0
+        select id, parent_id, dept_name as title, id as 'value', id as 'key' from blade_dept where
+        is_deleted = 0
         <if test="_parameter!=null">
             and tenant_id = #{_parameter}
         </if>

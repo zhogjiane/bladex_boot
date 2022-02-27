@@ -1,18 +1,4 @@
-/**
- * Copyright (c) 2018-2028, Chill Zhuang 庄骞 (smallchill@163.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package org.springblade.modules.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -76,9 +62,12 @@ public class RoleController extends BladeController {
 	})
 	@ApiOperationSupport(order = 2)
 	@ApiOperation(value = "列表", notes = "传入role")
-	public R<List<INode>> list(@ApiIgnore @RequestParam Map<String, Object> role, BladeUser bladeUser) {
+	public R<List<INode>> list(@ApiIgnore @RequestParam Map<String, Object> role,
+		BladeUser bladeUser) {
 		QueryWrapper<Role> queryWrapper = Condition.getQueryWrapper(role, Role.class);
-		List<Role> list = roleService.list((!bladeUser.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda().eq(Role::getTenantId, bladeUser.getTenantId()) : queryWrapper);
+		List<Role> list = roleService.list(
+			(!bladeUser.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda()
+				.eq(Role::getTenantId, bladeUser.getTenantId()) : queryWrapper);
 		return R.data(RoleWrapper.build().listNodeVO(list));
 	}
 
@@ -101,7 +90,8 @@ public class RoleController extends BladeController {
 	@ApiOperation(value = "树形结构", notes = "树形结构")
 	public R<List<RoleVO>> treeById(Long roleId, BladeUser bladeUser) {
 		Role role = roleService.getById(roleId);
-		List<RoleVO> tree = roleService.tree(Func.notNull(role) ? role.getTenantId() : bladeUser.getTenantId());
+		List<RoleVO> tree = roleService.tree(
+			Func.notNull(role) ? role.getTenantId() : bladeUser.getTenantId());
 		return R.data(tree);
 	}
 
@@ -138,7 +128,8 @@ public class RoleController extends BladeController {
 	@ApiOperation(value = "权限设置", notes = "传入roleId集合以及menuId集合")
 	public R grant(@RequestBody GrantVO grantVO) {
 		CacheUtil.clear(SYS_CACHE);
-		boolean temp = roleService.grant(grantVO.getRoleIds(), grantVO.getMenuIds(), grantVO.getDataScopeIds());
+		boolean temp = roleService.grant(grantVO.getRoleIds(), grantVO.getMenuIds(),
+			grantVO.getDataScopeIds());
 		return R.status(temp);
 	}
 

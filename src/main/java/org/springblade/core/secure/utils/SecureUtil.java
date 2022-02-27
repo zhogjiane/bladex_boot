@@ -1,17 +1,15 @@
 /**
  * Copyright (c) 2018-2028, Chill Zhuang 庄骞 (smallchill@163.com).
  * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0; you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
  * <p>
  * http://www.gnu.org/licenses/lgpl.html
  * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.springblade.core.secure.utils;
 
@@ -41,6 +39,7 @@ import java.util.*;
  * @author Chill
  */
 public class SecureUtil {
+
 	private static final String BLADE_USER_REQUEST_ATTR = "_BLADE_USER_REQUEST_ATTR_";
 
 	private final static String HEADER = TokenConstant.HEADER;
@@ -53,7 +52,8 @@ public class SecureUtil {
 	private final static String TENANT_ID = TokenConstant.TENANT_ID;
 	private final static String CLIENT_ID = TokenConstant.CLIENT_ID;
 	private final static Integer AUTH_LENGTH = TokenConstant.AUTH_LENGTH;
-	private static final String BASE64_SECURITY = Base64.getEncoder().encodeToString(TokenConstant.SIGN_KEY.getBytes(Charsets.UTF_8));
+	private static final String BASE64_SECURITY = Base64.getEncoder()
+		.encodeToString(TokenConstant.SIGN_KEY.getBytes(Charsets.UTF_8));
 
 	private static final IClientDetailsService clientDetailsService;
 
@@ -314,7 +314,8 @@ public class SecureUtil {
 	 * @param tokenType tokenType
 	 * @return jwt
 	 */
-	public static TokenInfo createJWT(Map<String, String> user, String audience, String issuer, String tokenType) {
+	public static TokenInfo createJWT(Map<String, String> user, String audience, String issuer,
+		String tokenType) {
 
 		String[] tokens = extractAndDecodeHeader();
 		assert tokens.length == 2;
@@ -392,8 +393,10 @@ public class SecureUtil {
 	@SneakyThrows
 	public static String[] extractAndDecodeHeader() {
 		// 获取请求头客户端信息
-		String header = Objects.requireNonNull(WebUtil.getRequest()).getHeader(SecureConstant.BASIC_HEADER_KEY);
-		header = Func.toStr(header).replace(SecureConstant.BASIC_HEADER_PREFIX_EXT, SecureConstant.BASIC_HEADER_PREFIX);
+		String header = Objects.requireNonNull(WebUtil.getRequest())
+			.getHeader(SecureConstant.BASIC_HEADER_KEY);
+		header = Func.toStr(header)
+			.replace(SecureConstant.BASIC_HEADER_PREFIX_EXT, SecureConstant.BASIC_HEADER_PREFIX);
 		if (!header.startsWith(SecureConstant.BASIC_HEADER_PREFIX)) {
 			throw new SecureException("No client information in request header");
 		}
@@ -441,9 +444,11 @@ public class SecureUtil {
 	 * @param clientSecret 客户端密钥
 	 * @return boolean
 	 */
-	private static boolean validateClient(IClientDetails clientDetails, String clientId, String clientSecret) {
+	private static boolean validateClient(IClientDetails clientDetails, String clientId,
+		String clientSecret) {
 		if (clientDetails != null) {
-			return StringUtil.equals(clientId, clientDetails.getClientId()) && StringUtil.equals(clientSecret, clientDetails.getClientSecret());
+			return StringUtil.equals(clientId, clientDetails.getClientId()) && StringUtil.equals(
+				clientSecret, clientDetails.getClientSecret());
 		}
 		return false;
 	}

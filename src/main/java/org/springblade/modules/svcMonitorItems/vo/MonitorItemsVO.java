@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiModel;
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "MonitorItemsVO对象", description = "监测项信息表")
 public class MonitorItemsVO extends MonitorItems {
+
 	private static final long serialVersionUID = 1L;
 
 }

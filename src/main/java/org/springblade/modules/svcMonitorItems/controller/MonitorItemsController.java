@@ -52,7 +52,8 @@ public class MonitorItemsController extends BladeController {
 	@ApiOperationSupport(order = 2)
 	@ApiOperation(value = "分页", notes = "传入monitorItems")
 	public R<IPage<MonitorItems>> list(MonitorItems monitorItems, Query query) {
-		IPage<MonitorItems> pages = monitorItemsService.page(Condition.getPage(query), Condition.getQueryWrapper(monitorItems));
+		IPage<MonitorItems> pages = monitorItemsService.page(Condition.getPage(query),
+			Condition.getQueryWrapper(monitorItems));
 		return R.data(pages);
 	}
 
@@ -63,7 +64,8 @@ public class MonitorItemsController extends BladeController {
 	@ApiOperationSupport(order = 3)
 	@ApiOperation(value = "分页", notes = "传入monitorItems")
 	public R<IPage<MonitorItemsVO>> page(MonitorItemsVO monitorItems, Query query) {
-		IPage<MonitorItemsVO> pages = monitorItemsService.selectMonitorItemsPage(Condition.getPage(query), monitorItems);
+		IPage<MonitorItemsVO> pages = monitorItemsService.selectMonitorItemsPage(
+			Condition.getPage(query), monitorItems);
 		return R.data(pages);
 	}
 

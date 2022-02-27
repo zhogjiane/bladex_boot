@@ -1,18 +1,4 @@
-/**
- * Copyright (c) 2018-2028, Chill Zhuang 庄骞 (smallchill@163.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package org.springblade.modules.system.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -41,7 +27,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @AllArgsConstructor
-public class TenantServiceImpl extends BaseServiceImpl<TenantMapper, Tenant> implements ITenantService {
+public class TenantServiceImpl extends BaseServiceImpl<TenantMapper, Tenant> implements
+	ITenantService {
 
 	private final TenantId tenantId;
 	private final RoleMapper roleMapper;
@@ -58,8 +45,10 @@ public class TenantServiceImpl extends BaseServiceImpl<TenantMapper, Tenant> imp
 	@Transactional(rollbackFor = Exception.class)
 	public boolean saveTenant(Tenant tenant) {
 		if (Func.isEmpty(tenant.getId())) {
-			List<Tenant> tenants = baseMapper.selectList(Wrappers.<Tenant>query().lambda().eq(Tenant::getIsDeleted, BladeConstant.DB_NOT_DELETED));
-			List<String> codes = tenants.stream().map(Tenant::getTenantId).collect(Collectors.toList());
+			List<Tenant> tenants = baseMapper.selectList(Wrappers.<Tenant>query().lambda()
+				.eq(Tenant::getIsDeleted, BladeConstant.DB_NOT_DELETED));
+			List<String> codes = tenants.stream().map(Tenant::getTenantId)
+				.collect(Collectors.toList());
 			String tenantId = getTenantId(codes);
 			tenant.setTenantId(tenantId);
 			// 新建租户对应的默认角色

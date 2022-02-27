@@ -1,18 +1,4 @@
-/**
- * Copyright (c) 2018-2028, Chill Zhuang 庄骞 (smallchill@163.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package org.springblade.modules.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -71,9 +57,12 @@ public class TenantController extends BladeController {
 		@ApiImplicitParam(name = "contactNumber", value = "联系电话", paramType = "query", dataType = "string")
 	})
 	@ApiOperation(value = "分页", notes = "传入tenant")
-	public R<IPage<Tenant>> list(@ApiIgnore @RequestParam Map<String, Object> tenant, Query query, BladeUser bladeUser) {
+	public R<IPage<Tenant>> list(@ApiIgnore @RequestParam Map<String, Object> tenant, Query query,
+		BladeUser bladeUser) {
 		QueryWrapper<Tenant> queryWrapper = Condition.getQueryWrapper(tenant, Tenant.class);
-		IPage<Tenant> pages = tenantService.page(Condition.getPage(query), (!bladeUser.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda().eq(Tenant::getTenantId, bladeUser.getTenantId()) : queryWrapper);
+		IPage<Tenant> pages = tenantService.page(Condition.getPage(query),
+			(!bladeUser.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda()
+				.eq(Tenant::getTenantId, bladeUser.getTenantId()) : queryWrapper);
 		return R.data(pages);
 	}
 
@@ -84,7 +73,9 @@ public class TenantController extends BladeController {
 	@ApiOperation(value = "下拉数据源", notes = "传入tenant")
 	public R<List<Tenant>> select(Tenant tenant, BladeUser bladeUser) {
 		QueryWrapper<Tenant> queryWrapper = Condition.getQueryWrapper(tenant);
-		List<Tenant> list = tenantService.list((!bladeUser.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda().eq(Tenant::getTenantId, bladeUser.getTenantId()) : queryWrapper);
+		List<Tenant> list = tenantService.list(
+			(!bladeUser.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda()
+				.eq(Tenant::getTenantId, bladeUser.getTenantId()) : queryWrapper);
 		return R.data(list);
 	}
 
@@ -125,7 +116,8 @@ public class TenantController extends BladeController {
 	@GetMapping("/info")
 	@ApiOperation(value = "配置信息", notes = "传入domain")
 	public R<Kv> info(String domain) {
-		Tenant tenant = tenantService.getOne(Wrappers.<Tenant>query().lambda().eq(Tenant::getDomain, domain));
+		Tenant tenant = tenantService.getOne(
+			Wrappers.<Tenant>query().lambda().eq(Tenant::getDomain, domain));
 		Kv kv = Kv.init();
 		if (tenant != null) {
 			kv.set("tenantId", tenant.getTenantId()).set("domain", tenant.getDomain());

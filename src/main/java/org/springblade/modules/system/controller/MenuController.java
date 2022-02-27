@@ -1,18 +1,4 @@
-/**
- * Copyright (c) 2018-2028, Chill Zhuang 庄骞 (smallchill@163.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package org.springblade.modules.system.controller;
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
@@ -77,7 +63,8 @@ public class MenuController extends BladeController {
 	@ApiOperationSupport(order = 2)
 	@ApiOperation(value = "列表", notes = "传入menu")
 	public R<List<MenuVO>> list(@ApiIgnore @RequestParam Map<String, Object> menu) {
-		List<Menu> list = menuService.list(Condition.getQueryWrapper(menu, Menu.class).lambda().orderByAsc(Menu::getSort));
+		List<Menu> list = menuService.list(
+			Condition.getQueryWrapper(menu, Menu.class).lambda().orderByAsc(Menu::getSort));
 		return R.data(MenuWrapper.build().listNodeVO(list));
 	}
 
@@ -93,7 +80,9 @@ public class MenuController extends BladeController {
 	@ApiOperationSupport(order = 3)
 	@ApiOperation(value = "菜单列表", notes = "传入menu")
 	public R<List<MenuVO>> menuList(@ApiIgnore @RequestParam Map<String, Object> menu) {
-		List<Menu> list = menuService.list(Condition.getQueryWrapper(menu, Menu.class).lambda().eq(Menu::getCategory, 1).orderByAsc(Menu::getSort));
+		List<Menu> list = menuService.list(
+			Condition.getQueryWrapper(menu, Menu.class).lambda().eq(Menu::getCategory, 1)
+				.orderByAsc(Menu::getSort));
 		return R.data(MenuWrapper.build().listNodeVO(list));
 	}
 
@@ -108,7 +97,8 @@ public class MenuController extends BladeController {
 	@PreAuth(RoleConstant.HAS_ROLE_ADMIN)
 	@ApiOperationSupport(order = 4)
 	@ApiOperation(value = "懒加载菜单列表", notes = "传入menu")
-	public R<List<MenuVO>> lazyMenuList(Long parentId, @ApiIgnore @RequestParam Map<String, Object> menu) {
+	public R<List<MenuVO>> lazyMenuList(Long parentId,
+		@ApiIgnore @RequestParam Map<String, Object> menu) {
 		List<MenuVO> list = menuService.lazyMenuList(parentId, menu);
 		return R.data(MenuWrapper.build().listNodeLazyVO(list));
 	}
@@ -143,7 +133,8 @@ public class MenuController extends BladeController {
 	@ApiOperationSupport(order = 7)
 	@ApiOperation(value = "前端菜单数据", notes = "前端菜单数据")
 	public R<List<MenuVO>> routes(BladeUser user) {
-		List<MenuVO> list = menuService.routes((user == null || user.getUserId() == 0L) ? null : user.getRoleId());
+		List<MenuVO> list = menuService.routes(
+			(user == null || user.getUserId() == 0L) ? null : user.getRoleId());
 		return R.data(list);
 	}
 

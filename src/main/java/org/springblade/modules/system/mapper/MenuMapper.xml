@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.springblade.modules.system.mapper.MenuMapper">
 
     <!-- 通用查询映射结果 -->
@@ -46,12 +47,21 @@
 
     <!-- 通用查询结果列 -->
     <sql id="baseColumnList">
-        select
-            id, code, parent_id, name, alias, path, source, sort, category, action, is_open, remark, is_deleted
+        select id,
+               code,
+               parent_id,
+               name,
+               alias,
+               path,
+               source,
+               sort,
+               category, action, is_open, remark, is_deleted
     </sql>
 
     <select id="selectMenuPage" resultMap="menuResultMap">
-        select * from blade_menu where is_deleted = 0
+        select *
+        from blade_menu
+        where is_deleted = 0
     </select>
 
     <select id="lazyMenuList" resultMap="menuVOResultMap">
@@ -63,7 +73,7 @@
         FROM
         blade_menu
         WHERE
-        parent_id = menu.id AND is_deleted = 0  AND category = 1
+        parent_id = menu.id AND is_deleted = 0 AND category = 1
         ) AS "has_children"
         FROM
         blade_menu menu
@@ -84,18 +94,26 @@
     </select>
 
     <select id="tree" resultMap="treeNodeResultMap">
-        select id, parent_id, name as title, id as 'value', id as 'key' from blade_menu where is_deleted = 0 and category = 1
+        select id, parent_id, name as title, id as 'value', id as 'key'
+        from blade_menu
+        where is_deleted = 0
+          and category = 1
     </select>
 
     <select id="allMenu" resultMap="menuResultMap">
-        select * from blade_menu where is_deleted = 0 and category = 1
+        select *
+        from blade_menu
+        where is_deleted = 0
+          and category = 1
     </select>
 
     <select id="roleMenu" resultMap="menuResultMap">
-        select * from blade_menu where is_deleted = 0 and id IN ( SELECT menu_id FROM blade_role_menu WHERE role_id IN
+        select * from blade_menu where is_deleted = 0 and id IN ( SELECT menu_id FROM
+        blade_role_menu WHERE role_id IN
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
             #{item}
-        </foreach> )
+        </foreach>
+        )
     </select>
 
     <select id="routes" resultMap="menuResultMap">
@@ -108,7 +126,8 @@
         and id IN ( SELECT menu_id FROM blade_role_menu WHERE role_id IN
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
             #{item}
-        </foreach> )
+        </foreach>
+        )
     </select>
 
     <select id="buttons" resultMap="menuResultMap">
@@ -148,62 +167,62 @@
         FROM
         blade_menu
         WHERE
-        is_deleted = 0 and  category = 2 AND id IN ( SELECT menu_id FROM blade_role_menu WHERE role_id IN
+        is_deleted = 0 and category = 2 AND id IN ( SELECT menu_id FROM blade_role_menu WHERE
+        role_id IN
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>)
     </select>
 
     <select id="grantTree" resultMap="treeNodeResultMap">
-        select id, parent_id, name as title, id as 'value', id as 'key' from blade_menu where is_deleted = 0
+        select id, parent_id, name as title, id as 'value', id as 'key'
+        from blade_menu
+        where is_deleted = 0
     </select>
 
     <select id="grantTreeByRole" resultMap="treeNodeResultMap">
-        select id, parent_id, name as title, id as 'value', id as 'key' from blade_menu where is_deleted = 0
+        select id, parent_id, name as title, id as 'value', id as 'key' from blade_menu where
+        is_deleted = 0
         and id in ( select menu_id from blade_role_menu where role_id in
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
             #{item}
-        </foreach> )
+        </foreach>
+        )
         or id in (
         select parent_id from blade_menu where is_deleted = 0
         and id in ( select menu_id from blade_role_menu where role_id in
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
             #{item}
-        </foreach> )
+        </foreach>
+        )
         )
     </select>
 
     <select id="grantDataScopeTree" resultMap="treeNodeResultMap">
-        SELECT
-            *
-        FROM
-            (
-                SELECT
-                    id,
-                    parent_id,
-                    NAME AS title,
-                    id AS "value",
-                    id AS "key"
-                FROM
-                    blade_menu
-                WHERE
-                    category = 1
-                  AND is_deleted = 0
-                  AND id IN ( SELECT menu_id FROM blade_scope_data WHERE is_deleted = 0 AND menu_id IS NOT NULL )
-            ) menu
+        SELECT *
+        FROM (
+                 SELECT id,
+                        parent_id,
+                        NAME AS title,
+                        id   AS "value",
+                        id   AS "key"
+                 FROM blade_menu
+                 WHERE category = 1
+                   AND is_deleted = 0
+                   AND id IN (SELECT menu_id
+                              FROM blade_scope_data
+                              WHERE is_deleted = 0 AND menu_id IS NOT NULL)
+             ) menu
 
         UNION ALL
 
-        SELECT
-            id,
-            menu_id AS parent_id,
-            scope_name AS title,
-            id AS "value",
-            id AS "key"
-        FROM
-            blade_scope_data
-        WHERE
-            is_deleted = 0
+        SELECT id,
+               menu_id    AS parent_id,
+               scope_name AS title,
+               id         AS "value",
+               id         AS "key"
+        FROM blade_scope_data
+        WHERE is_deleted = 0
           AND menu_id IS NOT NULL
     </select>
 
@@ -223,7 +242,8 @@
         WHERE
         category = 1
         AND is_deleted = 0
-        AND id IN ( SELECT menu_id FROM blade_scope_data WHERE is_deleted = 0 AND menu_id IS NOT NULL )
+        AND id IN ( SELECT menu_id FROM blade_scope_data WHERE is_deleted = 0 AND menu_id IS NOT
+        NULL )
         AND (
         id IN (
         select menu_id from blade_role_menu where role_id in
@@ -236,7 +256,8 @@
         and id in ( select menu_id from blade_role_menu where role_id in
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
             #{item}
-        </foreach> )
+        </foreach>
+        )
         )
         )
         ) menu
@@ -265,7 +286,8 @@
         and id in ( select menu_id from blade_role_menu where role_id in
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
             #{item}
-        </foreach> )
+        </foreach>
+        )
         )
         )
         AND menu_id IS NOT NULL

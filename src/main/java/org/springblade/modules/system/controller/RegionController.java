@@ -1,18 +1,4 @@
-/**
- * Copyright (c) 2018-2028, Chill Zhuang 庄骞 (smallchill@163.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package org.springblade.modules.system.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -68,7 +54,8 @@ public class RegionController extends BladeController {
 	@ApiOperationSupport(order = 2)
 	@ApiOperation(value = "分页", notes = "传入region")
 	public R<IPage<Region>> list(Region region, Query query) {
-		IPage<Region> pages = regionService.page(Condition.getPage(query), Condition.getQueryWrapper(region));
+		IPage<Region> pages = regionService.page(Condition.getPage(query),
+			Condition.getQueryWrapper(region));
 		return R.data(pages);
 	}
 
@@ -82,7 +69,8 @@ public class RegionController extends BladeController {
 	})
 	@ApiOperationSupport(order = 3)
 	@ApiOperation(value = "懒加载列表", notes = "传入menu")
-	public R<List<INode>> lazyList(String parentCode, @ApiIgnore @RequestParam Map<String, Object> menu) {
+	public R<List<INode>> lazyList(String parentCode,
+		@ApiIgnore @RequestParam Map<String, Object> menu) {
 		List<INode> list = regionService.lazyList(parentCode, menu);
 		return R.data(RegionWrapper.build().listNodeLazyVO(list));
 	}
@@ -97,7 +85,8 @@ public class RegionController extends BladeController {
 	})
 	@ApiOperationSupport(order = 4)
 	@ApiOperation(value = "懒加载列表", notes = "传入menu")
-	public R<List<INode>> lazyTree(String parentCode, @ApiIgnore @RequestParam Map<String, Object> menu) {
+	public R<List<INode>> lazyTree(String parentCode,
+		@ApiIgnore @RequestParam Map<String, Object> menu) {
 		List<INode> list = regionService.lazyTree(parentCode, menu);
 		return R.data(RegionWrapper.build().listNodeLazyVO(list));
 	}
@@ -149,8 +138,10 @@ public class RegionController extends BladeController {
 	@GetMapping("/select")
 	@ApiOperationSupport(order = 9)
 	@ApiOperation(value = "下拉数据源", notes = "传入tenant")
-	public R<List<Region>> select(@RequestParam(required = false, defaultValue = "00") String code) {
-		List<Region> list = regionService.list(Wrappers.<Region>query().lambda().eq(Region::getParentCode, code));
+	public R<List<Region>> select(
+		@RequestParam(required = false, defaultValue = "00") String code) {
+		List<Region> list = regionService.list(
+			Wrappers.<Region>query().lambda().eq(Region::getParentCode, code));
 		return R.data(list);
 	}
 

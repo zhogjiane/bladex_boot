@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.springblade.modules.system.mapper.LogUsualMapper">
 
     <!-- 通用查询映射结果 -->
@@ -22,8 +23,18 @@
     <!-- 通用查询结果列 -->
     <sql id="baseColumnList">
         select id,
-        create_time AS createTime,
-        service_id, server_host, server_ip, env, log_level, log_data, method, request_uri, user_agent, params, create_by
+               create_time AS createTime,
+               service_id,
+               server_host,
+               server_ip,
+               env,
+               log_level,
+               log_data,
+               method,
+               request_uri,
+               user_agent,
+               params,
+               create_by
     </sql>
 
 </mapper>

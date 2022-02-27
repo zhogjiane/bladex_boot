@@ -14,6 +14,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class MonitorItemsDTO extends MonitorItems {
+
 	private static final long serialVersionUID = 1L;
 
 }

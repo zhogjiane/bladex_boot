@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.springblade.modules.system.mapper.RegionMapper">
 
     <!-- 通用查询映射结果 -->
@@ -57,10 +58,11 @@
 
     <select id="lazyList" resultMap="regionVOResultMap">
         SELECT
-            region.*,
-            ( SELECT CASE WHEN count( 1 ) > 0 THEN 1 ELSE 0 END FROM blade_region WHERE parent_code = region.code ) AS "has_children"
+        region.*,
+        ( SELECT CASE WHEN count( 1 ) > 0 THEN 1 ELSE 0 END FROM blade_region WHERE parent_code =
+        region.code ) AS "has_children"
         FROM
-            blade_region region
+        blade_region region
         <where>
             <if test="param1!=null">
                 and region.parent_code = #{param1}
@@ -76,14 +78,15 @@
 
     <select id="lazyTree" resultMap="treeNodeResultMap">
         SELECT
-            region.code AS "id",
-            region.parent_code AS "parent_id",
-            region.name AS "title",
-            region.code AS "value",
-            region.code AS "key",
-            ( SELECT CASE WHEN count( 1 ) > 0 THEN 1 ELSE 0 END FROM blade_region WHERE parent_code = region.code ) AS "has_children"
+        region.code AS "id",
+        region.parent_code AS "parent_id",
+        region.name AS "title",
+        region.code AS "value",
+        region.code AS "key",
+        ( SELECT CASE WHEN count( 1 ) > 0 THEN 1 ELSE 0 END FROM blade_region WHERE parent_code =
+        region.code ) AS "has_children"
         FROM
-            blade_region region
+        blade_region region
         <where>
             <if test="param1!=null">
                 and region.parent_code = #{param1}

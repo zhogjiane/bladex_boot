@@ -1,18 +1,4 @@
-/**
- * Copyright (c) 2018-2028, Chill Zhuang 庄骞 (smallchill@163.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package org.springblade.modules.desk.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -73,8 +59,10 @@ public class NoticeController extends BladeController implements CacheNames {
 	})
 	@ApiOperationSupport(order = 2)
 	@ApiOperation(value = "分页", notes = "传入notice")
-	public R<IPage<NoticeVO>> list(@ApiIgnore @RequestParam Map<String, Object> notice, Query query) {
-		IPage<Notice> pages = noticeService.page(Condition.getPage(query), Condition.getQueryWrapper(notice, Notice.class));
+	public R<IPage<NoticeVO>> list(@ApiIgnore @RequestParam Map<String, Object> notice,
+		Query query) {
+		IPage<Notice> pages = noticeService.page(Condition.getPage(query),
+			Condition.getQueryWrapper(notice, Notice.class));
 		return R.data(NoticeWrapper.build().pageVO(pages));
 	}
 
@@ -132,7 +120,8 @@ public class NoticeController extends BladeController implements CacheNames {
 		Map<String, String> map1 = new HashMap<>(16);
 		map1.put("logo", "https://spring.io/img/homepage/icon-spring-framework.svg");
 		map1.put("title", "SpringBoot");
-		map1.put("description", "现在的web项目几乎都会用到spring框架，而要使用spring难免需要配置大量的xml配置文件，而 springboot的出现解   决了这一问题，一个项目甚至不用部署到服务器上直接开跑，真像springboot所说：“just run”。");
+		map1.put("description",
+			"现在的web项目几乎都会用到spring框架，而要使用spring难免需要配置大量的xml配置文件，而 springboot的出现解   决了这一问题，一个项目甚至不用部署到服务器上直接开跑，真像springboot所说：“just run”。");
 		map1.put("member", "Chill");
 		map1.put("href", "http://spring.io/projects/spring-boot");
 		list.add(map1);
@@ -140,15 +129,18 @@ public class NoticeController extends BladeController implements CacheNames {
 		Map<String, String> map2 = new HashMap<>(16);
 		map2.put("logo", "https://spring.io/img/homepage/icon-spring-cloud.svg");
 		map2.put("title", "SpringCloud");
-		map2.put("description", "SpringCloud是基于SpringBoot的一整套实现微服务的框架。他提供了微服务开发所需的配置管理、服务发现、断路器、智能路由、微代理、控制总线、全局锁、决策竞选、分布式会话和集群状态管理等组件。");
+		map2.put("description",
+			"SpringCloud是基于SpringBoot的一整套实现微服务的框架。他提供了微服务开发所需的配置管理、服务发现、断路器、智能路由、微代理、控制总线、全局锁、决策竞选、分布式会话和集群状态管理等组件。");
 		map2.put("member", "Chill");
 		map2.put("href", "http://spring.io/projects/spring-cloud");
 		list.add(map2);
 
 		Map<String, String> map3 = new HashMap<>(16);
-		map3.put("logo", "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1546359961068&di=05ff9406e6675ca9a58a525a7e7950b9&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D575314515%2C4268715674%26fm%3D214%26gp%3D0.jpg");
+		map3.put("logo",
+			"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1546359961068&di=05ff9406e6675ca9a58a525a7e7950b9&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D575314515%2C4268715674%26fm%3D214%26gp%3D0.jpg");
 		map3.put("title", "Mybatis");
-		map3.put("description", "MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。");
+		map3.put("description",
+			"MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。");
 		map3.put("member", "Chill");
 		map3.put("href", "http://www.mybatis.org/mybatis-3/getting-started.html");
 		list.add(map3);
@@ -156,7 +148,8 @@ public class NoticeController extends BladeController implements CacheNames {
 		Map<String, String> map4 = new HashMap<>(16);
 		map4.put("logo", "https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png");
 		map4.put("title", "React");
-		map4.put("description", "React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。");
+		map4.put("description",
+			"React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了。");
 		map4.put("member", "Chill");
 		map4.put("href", "https://reactjs.org/");
 		list.add(map4);
@@ -164,7 +157,8 @@ public class NoticeController extends BladeController implements CacheNames {
 		Map<String, String> map5 = new HashMap<>(16);
 		map5.put("logo", "https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png");
 		map5.put("title", "Ant Design");
-		map5.put("description", "蚂蚁金服体验技术部经过大量的项目实践和总结，沉淀出设计语言 Ant Design，这可不单纯只是设计原则、控件规范和视觉尺寸，还配套有前端代码实现方案。也就是说采用Ant Design后，UI设计和前端界面研发可同步完成，效率大大提升。");
+		map5.put("description",
+			"蚂蚁金服体验技术部经过大量的项目实践和总结，沉淀出设计语言 Ant Design，这可不单纯只是设计原则、控件规范和视觉尺寸，还配套有前端代码实现方案。也就是说采用Ant Design后，UI设计和前端界面研发可同步完成，效率大大提升。");
 		map5.put("member", "Chill");
 		map5.put("href", "https://ant.design/docs/spec/introduce-cn");
 		list.add(map5);
@@ -206,7 +200,6 @@ public class NoticeController extends BladeController implements CacheNames {
 		map2.put("type", "notification");
 		list.add(map2);
 
-
 		Map<String, String> map3 = new HashMap<>(16);
 		map3.put("id", "000000003");
 		map3.put("avatar", "https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg");
@@ -217,7 +210,6 @@ public class NoticeController extends BladeController implements CacheNames {
 		map3.put("clickClose", "true");
 		list.add(map3);
 
-
 		Map<String, String> map4 = new HashMap<>(16);
 		map4.put("id", "000000004");
 		map4.put("avatar", "https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg");
@@ -227,7 +219,6 @@ public class NoticeController extends BladeController implements CacheNames {
 		map4.put("datetime", "2018-08-07");
 		map4.put("clickClose", "true");
 		list.add(map4);
-
 
 		Map<String, String> map5 = new HashMap<>(16);
 		map5.put("id", "000000005");

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.springblade.modules.system.mapper.RoleMapper">
 
     <!-- 通用查询映射结果 -->
@@ -22,16 +23,23 @@
 
     <!-- 通用查询结果列 -->
     <sql id="baseColumnList">
-        select
-        id, parent_id, role_name, sort, role_alias, is_deleted
+        select id,
+               parent_id,
+               role_name,
+               sort,
+               role_alias,
+               is_deleted
     </sql>
 
     <select id="selectRolePage" resultMap="roleResultMap">
-        select * from blade_role where is_deleted = 0
+        select *
+        from blade_role
+        where is_deleted = 0
     </select>
 
     <select id="tree" resultMap="treeNodeResultMap">
-        select id, parent_id, role_name as title, id as 'value', id as 'key' from blade_role where is_deleted = 0
+        select id, parent_id, role_name as title, id as 'value', id as 'key' from blade_role where
+        is_deleted = 0
         <if test="param1!=null">
             and tenant_id = #{param1}
         </if>

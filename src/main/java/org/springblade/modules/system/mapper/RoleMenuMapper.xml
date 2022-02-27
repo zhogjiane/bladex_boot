@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.springblade.modules.system.mapper.RoleMenuMapper">
 
     <!-- 通用查询映射结果 -->
@@ -11,12 +12,16 @@
 
     <!-- 通用查询结果列 -->
     <sql id="baseColumnList">
-        select
-        id, menu_id, role_id, is_deleted
+        select id,
+               menu_id,
+               role_id,
+               is_deleted
     </sql>
 
     <select id="selectRoleMenuPage" resultMap="roleMenuResultMap">
-        select * from blade_role_menu where is_deleted = 0
+        select *
+        from blade_role_menu
+        where is_deleted = 0
     </select>
 
 </mapper>

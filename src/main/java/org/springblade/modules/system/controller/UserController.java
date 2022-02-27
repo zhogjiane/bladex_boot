@@ -1,18 +1,4 @@
-/**
- * Copyright (c) 2018-2028, Chill Zhuang 庄骞 (smallchill@163.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package org.springblade.modules.system.controller;
 
 
@@ -101,9 +87,12 @@ public class UserController {
 	})
 	@ApiOperationSupport(order = 3)
 	@ApiOperation(value = "列表", notes = "传入account和realName")
-	public R<IPage<UserVO>> list(@ApiIgnore @RequestParam Map<String, Object> user, Query query, BladeUser bladeUser) {
+	public R<IPage<UserVO>> list(@ApiIgnore @RequestParam Map<String, Object> user, Query query,
+		BladeUser bladeUser) {
 		QueryWrapper<User> queryWrapper = Condition.getQueryWrapper(user, User.class);
-		IPage<User> pages = userService.page(Condition.getPage(query), (!bladeUser.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda().eq(User::getTenantId, bladeUser.getTenantId()) : queryWrapper);
+		IPage<User> pages = userService.page(Condition.getPage(query),
+			(!bladeUser.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda()
+				.eq(User::getTenantId, bladeUser.getTenantId()) : queryWrapper);
 		return R.data(UserWrapper.build().pageVO(pages));
 	}
 
@@ -149,7 +138,7 @@ public class UserController {
 	@ApiOperationSupport(order = 7)
 	@ApiOperation(value = "权限设置", notes = "传入roleId集合以及menuId集合")
 	public R grant(@ApiParam(value = "userId集合", required = true) @RequestParam String userIds,
-				   @ApiParam(value = "roleId集合", required = true) @RequestParam String roleIds) {
+		@ApiParam(value = "roleId集合", required = true) @RequestParam String roleIds) {
 		boolean temp = userService.grant(userIds, roleIds);
 		return R.status(temp);
 	}
@@ -157,7 +146,8 @@ public class UserController {
 	@PostMapping("/reset-password")
 	@ApiOperationSupport(order = 8)
 	@ApiOperation(value = "初始化密码", notes = "传入userId集合")
-	public R resetPassword(@ApiParam(value = "userId集合", required = true) @RequestParam String userIds) {
+	public R resetPassword(
+		@ApiParam(value = "userId集合", required = true) @RequestParam String userIds) {
 		boolean temp = userService.resetPassword(userIds);
 		return R.status(temp);
 	}
@@ -173,10 +163,12 @@ public class UserController {
 	@PostMapping("/update-password")
 	@ApiOperationSupport(order = 9)
 	@ApiOperation(value = "修改密码", notes = "传入密码")
-	public R updatePassword(BladeUser user, @ApiParam(value = "旧密码", required = true) @RequestParam String oldPassword,
-							@ApiParam(value = "新密码", required = true) @RequestParam String newPassword,
-							@ApiParam(value = "新密码", required = true) @RequestParam String newPassword1) {
-		boolean temp = userService.updatePassword(user.getUserId(), oldPassword, newPassword, newPassword1);
+	public R updatePassword(BladeUser user,
+		@ApiParam(value = "旧密码", required = true) @RequestParam String oldPassword,
+		@ApiParam(value = "新密码", required = true) @RequestParam String newPassword,
+		@ApiParam(value = "新密码", required = true) @RequestParam String newPassword1) {
+		boolean temp = userService.updatePassword(user.getUserId(), oldPassword, newPassword,
+			newPassword1);
 		return R.status(temp);
 	}
 
@@ -206,14 +198,16 @@ public class UserController {
 		if (StringUtils.isEmpty(filename)) {
 			throw new RuntimeException("请上传文件!");
 		}
-		if ((!StringUtils.endsWithIgnoreCase(filename, ".xls") && !StringUtils.endsWithIgnoreCase(filename, ".xlsx"))) {
+		if ((!StringUtils.endsWithIgnoreCase(filename, ".xls") && !StringUtils.endsWithIgnoreCase(
+			filename, ".xlsx"))) {
 			throw new RuntimeException("请上传正确的excel文件!");
 		}
 		InputStream inputStream;
 		try {
 			UserImportListener importListener = new UserImportListener(userService);
 			inputStream = new BufferedInputStream(file.getInputStream());
-			ExcelReaderBuilder builder = EasyExcel.read(inputStream, UserExcel.class, importListener);
+			ExcelReaderBuilder builder = EasyExcel.read(inputStream, UserExcel.class,
+				importListener);
 			builder.doReadAll();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -228,9 +222,10 @@ public class UserController {
 	@GetMapping("export-user")
 	@ApiOperationSupport(order = 13)
 	@ApiOperation(value = "导出用户", notes = "传入user")
-	public void exportUser(@ApiIgnore @RequestParam Map<String, Object> user, BladeUser bladeUser, HttpServletResponse response) {
+	public void exportUser(@ApiIgnore @RequestParam Map<String, Object> user, BladeUser bladeUser,
+		HttpServletResponse response) {
 		QueryWrapper<User> queryWrapper = Condition.getQueryWrapper(user, User.class);
-		if (!SecureUtil.isAdministrator()){
+		if (!SecureUtil.isAdministrator()) {
 			queryWrapper.lambda().eq(User::getTenantId, bladeUser.getTenantId());
 		}
 		queryWrapper.lambda().eq(User::getIsDeleted, BladeConstant.DB_NOT_DELETED);

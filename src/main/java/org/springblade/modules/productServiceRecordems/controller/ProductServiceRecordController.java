@@ -1,18 +1,4 @@
-/**
- * Copyright (c) 2018-2028, Chill Zhuang 庄骞 (smallchill@163.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package org.springblade.modules.productServiceRecordems.controller;
 
 import io.swagger.annotations.Api;
@@ -55,7 +41,8 @@ public class ProductServiceRecordController extends BladeController {
 	@ApiOperationSupport(order = 1)
 	@ApiOperation(value = "详情", notes = "传入productServiceRecord")
 	public R<ProductServiceRecord> detail(ProductServiceRecord productServiceRecord) {
-		ProductServiceRecord detail = productServiceRecordService.getOne(Condition.getQueryWrapper(productServiceRecord));
+		ProductServiceRecord detail = productServiceRecordService.getOne(
+			Condition.getQueryWrapper(productServiceRecord));
 		return R.data(detail);
 	}
 
@@ -65,8 +52,10 @@ public class ProductServiceRecordController extends BladeController {
 	@GetMapping("/list")
 	@ApiOperationSupport(order = 2)
 	@ApiOperation(value = "分页", notes = "传入productServiceRecord")
-	public R<IPage<ProductServiceRecord>> list(ProductServiceRecord productServiceRecord, Query query) {
-		IPage<ProductServiceRecord> pages = productServiceRecordService.page(Condition.getPage(query), Condition.getQueryWrapper(productServiceRecord));
+	public R<IPage<ProductServiceRecord>> list(ProductServiceRecord productServiceRecord,
+		Query query) {
+		IPage<ProductServiceRecord> pages = productServiceRecordService.page(
+			Condition.getPage(query), Condition.getQueryWrapper(productServiceRecord));
 		return R.data(pages);
 	}
 
@@ -76,8 +65,10 @@ public class ProductServiceRecordController extends BladeController {
 	@GetMapping("/page")
 	@ApiOperationSupport(order = 3)
 	@ApiOperation(value = "分页", notes = "传入productServiceRecord")
-	public R<IPage<ProductServiceRecordVO>> page(ProductServiceRecordVO productServiceRecord, Query query) {
-		IPage<ProductServiceRecordVO> pages = productServiceRecordService.selectProductServiceRecordPage(Condition.getPage(query), productServiceRecord);
+	public R<IPage<ProductServiceRecordVO>> page(ProductServiceRecordVO productServiceRecord,
+		Query query) {
+		IPage<ProductServiceRecordVO> pages = productServiceRecordService.selectProductServiceRecordPage(
+			Condition.getPage(query), productServiceRecord);
 		return R.data(pages);
 	}
 
@@ -111,7 +102,7 @@ public class ProductServiceRecordController extends BladeController {
 		return R.status(productServiceRecordService.saveOrUpdate(productServiceRecord));
 	}
 
-	
+
 	/**
 	 * 删除 产品服务台账
 	 */
@@ -122,5 +113,5 @@ public class ProductServiceRecordController extends BladeController {
 		return R.status(productServiceRecordService.removeByIds(Func.toLongList(ids)));
 	}
 
-	
+
 }

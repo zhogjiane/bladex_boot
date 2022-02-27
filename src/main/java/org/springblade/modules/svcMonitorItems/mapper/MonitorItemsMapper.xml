@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.modules.svcMonitorItems.mapper.MonitorItemsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="monitorItemsResultMap" type="org.springblade.modules.svcMonitorItems.entity.MonitorItems">
+        <id column="id" property="id"/>
+        <result column="cname" property="cname"/>
+        <result column="cunit" property="cunit"/>
+        <result column="ctype" property="ctype"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="create_dept" property="createDept"/>
+    </resultMap>
+
+
+    <select id="selectMonitorItemsPage" resultMap="monitorItemsResultMap">
+        select * from svc_monitor_items where is_deleted = 0
+    </select>
+
+</mapper>

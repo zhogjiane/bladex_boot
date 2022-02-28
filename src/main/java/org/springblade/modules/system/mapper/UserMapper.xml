@@ -102,4 +102,10 @@
         SELECT id,name FROM blade_user where is_deleted = 0
     </select>
 
+    <select id="getAllToUser" resultType="org.springblade.modules.system.vo.UserVO">
+        select 1 as id,'所有人' as name from blade_user
+        union
+        SELECT id,name FROM blade_user where is_deleted = 0
+    </select>
+
 </mapper>

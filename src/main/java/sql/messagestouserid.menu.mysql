@@ -1,0 +1,10 @@
+INSERT INTO `blade_menu`(`id`, `parent_id`, `code`, `name`, `alias`, `path`, `source`, `sort`, `category`, `action`, `is_open`, `remark`, `is_deleted`)
+VALUES ('1497561349615968262', 1123598815738675201, 'messagestouserid', '', 'menu', '/message/messagestouserid', NULL, 1, 1, 0, 1, NULL, 0);
+INSERT INTO `blade_menu`(`id`, `parent_id`, `code`, `name`, `alias`, `path`, `source`, `sort`, `category`, `action`, `is_open`, `remark`, `is_deleted`)
+VALUES ('1497561349615968263', '1497561349615968262', 'messagestouserid_add', '新增', 'add', '/message/messagestouserid/add', 'plus', 1, 2, 1, 1, NULL, 0);
+INSERT INTO `blade_menu`(`id`, `parent_id`, `code`, `name`, `alias`, `path`, `source`, `sort`, `category`, `action`, `is_open`, `remark`, `is_deleted`)
+VALUES ('1497561349615968264', '1497561349615968262', 'messagestouserid_edit', '修改', 'edit', '/message/messagestouserid/edit', 'form', 2, 2, 2, 1, NULL, 0);
+INSERT INTO `blade_menu`(`id`, `parent_id`, `code`, `name`, `alias`, `path`, `source`, `sort`, `category`, `action`, `is_open`, `remark`, `is_deleted`)
+VALUES ('1497561349615968265', '1497561349615968262', 'messagestouserid_delete', '删除', 'delete', '/api/blade-message/messagestouserid/remove', 'delete', 3, 2, 3, 1, NULL, 0);
+INSERT INTO `blade_menu`(`id`, `parent_id`, `code`, `name`, `alias`, `path`, `source`, `sort`, `category`, `action`, `is_open`, `remark`, `is_deleted`)
+VALUES ('1497561349615968266', '1497561349615968262', 'messagestouserid_view', '查看', 'view', '/message/messagestouserid/view', 'file-text', 4, 2, 2, 1, NULL, 0);

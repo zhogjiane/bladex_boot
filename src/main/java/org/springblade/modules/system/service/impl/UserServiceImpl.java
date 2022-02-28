@@ -213,5 +213,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 		return baseMapper.getAllUser();
 	}
 
+	@Override
+	public List<UserVO> getAllToUser() {
+		return baseMapper.getAllToUser();
+	}
+
 
 }

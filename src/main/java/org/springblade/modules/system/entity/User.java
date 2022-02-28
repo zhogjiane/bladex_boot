@@ -110,9 +110,9 @@ public class User extends TenantEntity {
 	/**
 	 * 实习信息提交状态
 	 */
-	private int submitStatus;
+	private Integer submitStatus;
 	/**
 	 * 实习成绩
 	 */
-	private int grades;
+	private Integer grades;
 }

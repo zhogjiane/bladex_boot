@@ -278,4 +278,15 @@ public class UserController {
 		List<UserVO> list = userService.getAllUser();
 		return R.data(list);
 	}
+
+	/**
+	 * 查询所有接收人
+	 */
+	@ApiOperationSupport(order = 17)
+	@ApiOperation(value = "查询所有接收人")
+	@GetMapping("/getAllToUser")
+	public R<List<UserVO>> getAllToUser() {
+		List<UserVO> list = userService.getAllToUser();
+		return R.data(list);
+	}
 }

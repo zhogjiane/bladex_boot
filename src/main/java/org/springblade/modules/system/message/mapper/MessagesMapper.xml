@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.modules.system.message.mapper.MessagesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="messagesResultMap" type="org.springblade.modules.system.message.entity.Messages">
+        <id column="id" property="id"/>
+        <result column="message" property="message"/>
+        <result column="user_id" property="userId"/>
+        <result column="to_user_id" property="toUserId"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_dept" property="createDept"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+
+    <select id="selectMessagesPage" resultType="org.springblade.modules.system.message.vo.MessagesVO">
+        SELECT
+            id,
+            message,
+            user_id,
+            to_user_id,
+            CONCAT(ROUND(knowNum / allNum,2),'%') percentage
+        FROM
+            (
+            SELECT
+                m.*,
+                ( SELECT count( 1 ) FROM MessagesToUserId WHERE messages_id = m.id ) allNum,
+                ( SELECT count( 1 ) FROM MessagesToUserId WHERE messages_id = m.id AND STATUS = 2 ) knowNum
+            FROM
+                messages m
+            WHERE
+            m.is_deleted = 0
+            ) a
+    </select>
+
+    <select id="selectMessagesPage2" resultMap="messagesResultMap">
+        SELECT
+            *
+        FROM
+            messages
+        WHERE
+            is_deleted = 0
+            AND id IN (
+            SELECT
+                messages_id
+            FROM
+                MessagesToUserId
+            WHERE
+            to_user_id = #{toUserId}
+            AND STATUS = 1)
+    </select>
+
+    <update id="updateMessages">
+        update MessagesToUserId set status = 2 where messages_id = #{id} and to_user_id = #{toUserId}
+    </update>
+
+    <update id="updateUserMessages">
+        update MessagesToUserId set status = 2 where to_user_id = #{toUserId}
+    </update>
+</mapper>

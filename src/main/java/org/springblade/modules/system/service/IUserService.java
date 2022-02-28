@@ -150,4 +150,10 @@ public interface IUserService extends BaseService<User> {
 	 * @return
 	 */
     List<UserVO> getAllUser();
+
+	/**
+	 * 查询所有接收人
+	 * @return
+	 */
+	List<UserVO> getAllToUser();
 }

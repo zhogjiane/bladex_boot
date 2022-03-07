@@ -212,6 +212,7 @@ public class UserController {
 		InputStream inputStream;
 		try {
 			UserImportListener importListener = new UserImportListener(userService);
+			//文件流读取文件
 			inputStream = new BufferedInputStream(file.getInputStream());
 			ExcelReaderBuilder builder = EasyExcel.read(inputStream, UserExcel.class, importListener);
 			builder.doReadAll();

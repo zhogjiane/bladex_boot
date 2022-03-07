@@ -108,13 +108,17 @@ swagger:
     url: https://gitee.com/smallc
 
 #oss配置
+#配置附件上传地址，使用七牛云
 oss:
   enabled: true
   name: qiniu
   tenant-mode: true
+  #域名
   endpoint: http://r75gp562u.hd-bkt.clouddn.com
+  #密钥
   access-key: 0hJ5yGWLjIdF3bQPCCL4HhVVJyA_bIysVaAA2vcb
   secret-key: 5KPgi3C_y3N5coPTOPr_bKUoxC-GZLvvnGiY_wfQ
+  #储存空间名
   bucket-name: blade2022
 
 #第三方登陆配置

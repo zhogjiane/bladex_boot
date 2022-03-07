@@ -50,9 +50,9 @@ public class CaptchaTokenGranter implements ITokenGranter {
 		// 获取验证码
 		String redisCode = String.valueOf(redisUtil.get(CacheNames.CAPTCHA_KEY + key));
 		// 判断验证码
-/*		if (code == null || !StringUtil.equalsIgnoreCase(redisCode, code)) {
+		if (code == null || !StringUtil.equalsIgnoreCase(redisCode, code)) {
 			throw new ServiceException(TokenUtil.CAPTCHA_NOT_CORRECT);
-		}*/
+		}
 
 		String tenantId = tokenParameter.getArgs().getStr("tenantId");
 		String account = tokenParameter.getArgs().getStr("account");

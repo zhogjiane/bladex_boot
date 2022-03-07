@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.springblade.modules.template.mapper.TemplateMapper">
 
-    <!-- 通用查询映射结果 -->
+    <!-- 通用查询映射结果，要注意与数据库字段保持一致 -->
     <resultMap id="templateResultMap" type="org.springblade.modules.template.entity.Template">
         <id column="id" property="id"/>
         <result column="template_name" property="templateName"/>

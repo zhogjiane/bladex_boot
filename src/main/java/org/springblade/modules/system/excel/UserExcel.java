@@ -26,7 +26,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * UserDTO
+ * User导出类，需要导入的字段可自定义，但需要与数据库字段保持一致
  *
  * @author Chill
  */
